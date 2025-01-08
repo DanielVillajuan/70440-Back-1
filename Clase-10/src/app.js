@@ -1,43 +1,36 @@
-import express from 'express'
-import handlebars from 'express-handlebars'
-import viewRouter from './routes/viewRouter.router.js'
-import __dirname from './utils.js'
-import { Server } from 'socket.io'
-import { msg } from './managers/messages.js'
+import express from 'express';
+import handlebars from 'express-handlebars';
+import{__dirname} from './utils.js'
+import ViewRouters from './routes/views.route.js'
+import { Server } from 'socket.io';
 
-const app = express()
+const app = express();
+
+app.engine('handlebars', handlebars.engine()); // esta linea setea el tipo de motor de plantilla
+app.set('views', __dirname + '/views');
+app.set('view engine','handlebars');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
+app.use('/',ViewRouters);
+
 
 const httpServer = app.listen(8080, () => {
-    console.log('Servidor on')
+    console.log('Conectado')
 })
 
-app.engine('handlebars', handlebars.engine())
-app.set('views', __dirname + '/views')
-app.set('view engine', 'handlebars')
-app.use(express.static(__dirname + '/public'))
-app.use('/', viewRouter)
+const socketServer = new Server(httpServer)
 
-const ioServer = new Server(httpServer)
+socketServer.on('connection', (socket) => {
+    console.log('id socket: ',socket.id)
+    console.log('N° sockets conectados: ',socketServer.engine.clientsCount)
+    console.log('Nuevo dispositivo conectado')
 
-ioServer.on('connection', async (socket) => {
-    console.log('Usuario conectado', socket.id)
-
-
-    socket.on("message", async (message) => {
-        await msg.create(message)
-        ioServer.emit('messages_all', await msg.getAll())
+    socket.on('mensaje',(data) => {
+        console.log('Evento mensaje con data: ',data)
     })
 
-    socket.on('newUser', (username) => {
-        console.log(username, 'se conecto al cliente')
-        socket.broadcast.emit('newLogin', username)
-    })
+    socket.emit('mensaje_respuesta','mensaje de respuesta desde el servidor')
 
-    socket.on('user_disconnect', (username)=> {
-        console.log(username,'se desconecto')
-        socket.broadcast.emit('closeLogin',username)
-    })
-
-    ioServer.emit('messages_all', await msg.getAll())
-
+    socketServer.emit('mensaje_para_todos',' hoal a todos')
 })

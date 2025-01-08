@@ -1,0 +1,17 @@
+<div>
+    {{#if isAdmin}}
+        <div>Estas viendo esto porque sos admin</div>
+        {{#each notas}}
+        <div>
+            {{this.titulo}} 
+        </div>
+        <div>
+            {{this.description}}
+        </div>
+    {{/each}}
+    {{else}}
+        <div>No sos admin :(</div>
+    {{/if}}
+
+    
+</div>
