@@ -1,0 +1,20 @@
+{
+  "name": "proyectofinalbackend1",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4",
+    "express-handlebars": "^7.1.3",
+    "socket.io": "^4.7.5"
+  }
+}

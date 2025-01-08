@@ -1,0 +1,53 @@
+html{
+    margin: 0;
+    padding: 0; 
+}
+body{
+    margin: 0;
+    padding: 10px;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-items: center;
+}
+h1{
+    width: 100%;
+    text-align: center;
+}
+
+.realtimeproducts{
+    width: 70%;
+    border: 1px solid black;
+}
+.realtimeproducts > h2{
+    text-align: center;
+}
+.products-container-rtp{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+.cart{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+
+    width: 200px;
+
+    display: flex;
+    flex-direction: column;
+}
+.cart > p{
+    margin: 0;
+    padding: 0;
+    line-height: 20px;
+}
+
+.events{
+    flex: 1;
+    border: 1px solid black;
+    padding: 10px;
+}
+.events h2{
+    font-size: 20px;
+}

@@ -1,0 +1,41 @@
+<h1>DESDE EL SERVIDOR</h1>
+<div class="realtimeproducts">
+    <h2>PRODUCTOS EN TIEMPO REAL</h2>
+    <div class="products-container-rtp"></div>
+</div>
+<div class="events">
+    <div class="add">
+        <h2>Agregar Producto</h2>
+        <div class="formulario-add">
+            <input id="add-title" type="text" placeholder="Titulo">
+            <input id="add-description" type="text" placeholder="Descripcion">
+            <input id="add-price" type="number" placeholder="Precio">
+            <input id="add-code" type="text" placeholder="Codigo">
+            <input id="add-stock" type="number" placeholder="Stock">
+            <input id="add-category" type="text" placeholder="Categoria">
+            <button id="button-add">Agregar Nuevo Producto</button>
+        </div>
+    </div>
+    <div class="update">
+        <h2>Modificar Producto</h2>
+        <div class="formulario-update">
+            <input id="update-id" type="text" placeholder="ID Producto a Modificar">
+            <input id="update-title" type="text" placeholder="Titulo">
+            <input id="update-description" type="text" placeholder="Descripcion">
+            <input id="update-price" type="number" placeholder="Precio">
+            <input id="update-code" type="text" placeholder="Codigo">
+            <input id="update-stock" type="number" placeholder="Stock">
+            <input id="update-category" type="text" placeholder="Categoria">
+            <button id="button-update" onclick="updateProduct()">Modificar Producto</button>
+        </div>
+    </div>
+    <div class="delete">
+        <h2>Eliminar Producto</h2>
+        <div class="formulario-delete">
+            <input id="delete-id" type="text" placeholder="ID Producto a Eliminar">
+            <button id="button-delete" onclick="deleteProduct()">Eliminar Producto</button>
+        </div>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="./realtimeproducts.js"></script>
