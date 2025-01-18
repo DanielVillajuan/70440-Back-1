@@ -4,9 +4,24 @@ import { UserModel } from "../models/users.model.js";
 const route = Router()
 
 route.get('/',async (req, res) => {
-    const result = await UserModel.find({first_name: 'Daniel'}).explain('executionStats')
-    console.log(result)
-    res.json({mensaje: 'Usuarios', result})
+	const query = req.query
+	const opcion = {
+		limit: query.limit || 10,
+		page: query.page || 1,
+		sort: { } 
+	}
+
+    const result = await UserModel.paginate({}, opcion)
+	const response = {
+		count: result.totalDocs,
+		result: result.docs,
+		currentPage: result.page,
+		hasPrev: result.hasPrevPage,
+		hasNext: result.hasNextPage,
+		prev: `?page=${result.prevPage}&limit=${query.limit}`,
+		next: `?page=${result.nextPage}&limit=${query.limit}`
+	}
+    res.json(response)
 })
 
 export default route
